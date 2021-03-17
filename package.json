@@ -20,8 +20,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
@@ -31,9 +30,10 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 safari versions",
+      "last 2 edge versions"
     ]
   },
   "devDependencies": {

@@ -1,10 +1,4 @@
 
-
-
-const App = () => {
-  return (
-    <div></div>
-  );
-}
+const App = () => null;
 
 export default App;
