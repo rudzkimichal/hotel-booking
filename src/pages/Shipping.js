@@ -62,13 +62,10 @@ import {useState} from 'react';
    }
 
    const isValid = () => {
-     console.log(errors);
      let validation = true;
      for(const key in errors) {
        if(errors[key] !== null) validation = false;
      }
-
-     console.log('Validation: ', validation);
 
      return validation;
    }
@@ -76,23 +73,19 @@ import {useState} from 'react';
    return (
      <form onSubmit={handleSubmit}>
        <fieldset>
-         <label htmlFor='name'>Name*</label>
-         <input onChange={validateName} type='text' name='name' id='name' value={nameValue} />
+         <input onChange={validateName} type='text' name='name' id='name' value={nameValue} placeholder='Name*' />
          <span>{errors.name}</span>
        </fieldset>
        <fieldset>
-         <label htmlFor='address'>Address*</label>
-         <input onChange={validateAddress} type='text' name='address' id='address' value={addressValue} />
+         <input onChange={validateAddress} type='text' name='address' id='address' value={addressValue} placeholder='Address*' />
          <span>{errors.address}</span>
        </fieldset>
        <fieldset>
-         <label htmlFor='phone'>Phone</label>
-         <input onChange={validatePhone} type='text' name='phone' id='phone' value={phoneValue} />
+         <input onChange={validatePhone} type='text' name='phone' id='phone' value={phoneValue} placeholder='Phone' />
          <span>{errors.phone}</span>
        </fieldset>
        <fieldset>
-         <label htmlFor='email'>Email*</label>
-         <input onChange={validateEmail} type='email' name='email' id='email' value={emailValue} />
+         <input onChange={validateEmail} type='email' name='email' id='email' value={emailValue} placeholder='Email*' />
          <span>{errors.email}</span>
        </fieldset>
        <button type='submit' disabled={!isValid()}>Pay</button>

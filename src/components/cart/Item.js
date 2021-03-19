@@ -34,7 +34,7 @@ justify-content: space-around;
 width: 20%;
 `;
 
-const Item = ({item, onDelete}) => {
+const Item = ({item, deleteItem}) => {
 
   const [quantity, setQuantity] = useState(0);
   const PriceContext = useContext(TotalPriceContext);
@@ -66,10 +66,10 @@ const Item = ({item, onDelete}) => {
     </RowContainer>
     <ColumnContainer>
       <div>{'\u00A3'}{item.price * quantity}</div>
-      <Image onClick={onDelete} src={bin} alt={bin} />
+      <Image onClick={deleteItem} src={bin} alt={bin} />
     </ColumnContainer>
    </ItemContainer>
  );
-};
+}
 
 export default Item;

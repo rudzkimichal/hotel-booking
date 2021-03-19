@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import Item from './Item';
 import {VenuesContext} from '../../context/context';
-import {useContext} from 'react';
+import {useContext, useState, useEffect} from 'react';
 
 const ItemsListWrapper = styled.div`
 width: 100%;
@@ -20,14 +20,25 @@ margin-bottom: 1rem;
 const ItemsList = () => {
 
   const Venues = useContext(VenuesContext);
+  const [items, setItems] = useState([]);
 
-  const handleDelete = () => {
-    Venues.filter((item, index) => item[index] !== 1);
-  };
+  useEffect(() => {
+    setItems(Venues)
+  }, [Venues]);
+
+  console.log(items);
+
+  let newItems = [];
+
+  const deleteItem = id => {
+    console.log('clicked');
+    newItems = items.filter(item => item.id !== id);
+    setItems(newItems);
+  }
 
   return (
     <ItemsListWrapper>
-      {Venues.map((item, index) => <Item key={index} item={item} onDelete={handleDelete} />)}
+      {items.map(item => <Item key={item.id} item={item} deleteItem={() => deleteItem(item.id)} />)}
     </ItemsListWrapper>
   );
 }

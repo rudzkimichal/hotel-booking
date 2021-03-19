@@ -1,15 +1,12 @@
 
-
-import Cart from './pages/Cart';
 import styled from 'styled-components';
 import axios from 'axios';
 import {useState, useEffect, lazy, Suspense} from 'react';
-
-import NotFound from './pages/NotFound';
 import {VenuesContext} from './context/context';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 
-import {BrowserRouter as Router, Route, Switch, Redirect}  from 'react-router-dom';
-
+import Cart from './pages/Cart';
+import NotFound from './pages/NotFound';
 const Shipping = lazy(() => import('./pages/Shipping'));
 
 
@@ -40,8 +37,6 @@ const App = () => {
     .then(data => setVenues(data))
     .catch(err => console.error(err));
   }, []);
-
-
 
   return (
     <VenuesContext.Provider value={venues}>
