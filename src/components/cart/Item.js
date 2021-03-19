@@ -1,5 +1,8 @@
 
 import styled from 'styled-components';
+import {useState, useContext} from 'react';
+import {TotalPriceContext} from '../../context/context';
+import bin from '../../assets/bin.svg';
 
 const ItemContainer = styled.div`
 width: 100%;
@@ -11,8 +14,9 @@ flex-wrap: wrap;
 margin-bottom: 1rem;
 `;
 
-const Photo = styled.div`
-width: 20%;
+const Image = styled.img`
+max-width: 20%;
+max-height: 100%;
 `;
 
 const ColumnContainer = styled.div`
@@ -30,22 +34,39 @@ justify-content: space-around;
 width: 20%;
 `;
 
-const Item = () => {
+const Item = ({item, onDelete}) => {
+
+  const [quantity, setQuantity] = useState(0);
+  const PriceContext = useContext(TotalPriceContext);
+
+  const increment = () => {
+    setQuantity(quantity => quantity + 1);
+  }
+
+  const decrement = () => {
+    setQuantity(quantity => quantity - 1);
+  }
+
+  const handleClick = e => {
+    e.target.value === '+' ? increment() : decrement();
+    PriceContext.calculateHotelPrice(item.price, e.target.value);
+  }
+
  return (
    <ItemContainer>
-    <Photo>Photo</Photo>
+    <Image src={item.image} alt={item.image} />
     <ColumnContainer>
-      <div>Name</div>
-      <div>Desc</div>
+      <div>{item.name}</div>
+      <div>{item.location} - {'\u00A3'}{item.price} per night</div>
     </ColumnContainer>
     <RowContainer>
-      <button>-</button>
-      <span>number</span>
-      <button>+</button>
+      <button value='-' onClick={handleClick} disabled={quantity < 1}>-</button>
+      <span>{quantity}</span>
+      <button value='+' onClick={handleClick} disabled={quantity > 15}>+</button>
     </RowContainer>
     <ColumnContainer>
-      <div>Price</div>
-      <div>Delete</div>
+      <div>{'\u00A3'}{item.price * quantity}</div>
+      <Image onClick={onDelete} src={bin} alt={bin} />
     </ColumnContainer>
    </ItemContainer>
  );

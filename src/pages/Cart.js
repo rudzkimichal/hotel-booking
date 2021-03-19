@@ -1,6 +1,8 @@
 
 import styled from 'styled-components';
-import Item from '../components/cart/Item';
+import ItemsList from '../components/cart/ItemsList';
+import {TotalPriceContext} from '../context/context';
+import {useState} from 'react';
 
 const CartContainer = styled.div`
 
@@ -16,30 +18,30 @@ padding: 1rem;
 
 `;
 
-const ItemsList = styled(CartContainer)`
-width: 100%;
-flex-direction: column;
-margin-bottom: 1rem;
-`;
-
 const Summary = styled.div`
 display: flex;
 flex-direction: column;
 `;
 
 const Cart = () => {
+
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const calculateHotelPrice = (price, value) => {
+    value === '+' ? setTotalPrice(totalPrice => totalPrice + price) : setTotalPrice(totalPrice => totalPrice - price);
+  }
+
   return (
-    <CartContainer>
-      <ItemsList>
-        <Item />
-        <Item />
-        <Item />
-      </ItemsList>
-      <Summary>
-      <div>Price</div>
-      <button>Pay</button>
-      </Summary>
-    </CartContainer>
+    <TotalPriceContext.Provider value={{totalPrice, calculateHotelPrice}}>
+      <CartContainer>
+        <ItemsList />
+        <Summary>
+        <div>Total: {'\u00A3'}{totalPrice}</div>
+        <button>Buy</button>
+        </Summary>
+
+      </CartContainer>
+    </TotalPriceContext.Provider>
   );
 
 };

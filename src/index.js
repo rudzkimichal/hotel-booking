@@ -58,7 +58,6 @@ table {
 }
 
 :root {
-  @import url('https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200;400;700&display=swap');
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   color: #000;
