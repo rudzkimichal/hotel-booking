@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ItemsList from '../components/cart/ItemsList';
 import {TotalPriceContext} from '../context/context';
 import {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
 const CartContainer = styled.div`
 
@@ -31,13 +32,18 @@ const Cart = () => {
     value === '+' ? setTotalPrice(totalPrice => totalPrice + price) : setTotalPrice(totalPrice => totalPrice - price);
   }
 
+  const history = useHistory();
+  const handleClick = () => {
+    history.push('/shipping');
+  }
+
   return (
     <TotalPriceContext.Provider value={{totalPrice, calculateHotelPrice}}>
       <CartContainer>
         <ItemsList />
         <Summary>
         <div>Total: {'\u00A3'}{totalPrice}</div>
-        <button>Buy</button>
+        <button onClick={handleClick}>Buy</button>
         </Summary>
 
       </CartContainer>

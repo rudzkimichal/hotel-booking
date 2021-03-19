@@ -62,7 +62,7 @@ const Item = ({item, onDelete}) => {
     <RowContainer>
       <button value='-' onClick={handleClick} disabled={quantity < 1}>-</button>
       <span>{quantity}</span>
-      <button value='+' onClick={handleClick} disabled={quantity > 15}>+</button>
+      <button value='+' onClick={handleClick} disabled={quantity > 14}>+</button>
     </RowContainer>
     <ColumnContainer>
       <div>{'\u00A3'}{item.price * quantity}</div>

@@ -1,10 +1,17 @@
 
+
 import Cart from './pages/Cart';
 import styled from 'styled-components';
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, lazy, Suspense} from 'react';
+
+import NotFound from './pages/NotFound';
 import {VenuesContext} from './context/context';
-import Payment from './pages/Payment';
+
+import {BrowserRouter as Router, Route, Switch, Redirect}  from 'react-router-dom';
+
+const Shipping = lazy(() => import('./pages/Shipping'));
+
 
 const Header = styled.header`
 display: flex;
@@ -41,10 +48,19 @@ const App = () => {
       <Header>
         <h1>Hotel booking tool</h1>
       </Header>
-
       <Main>
-      <Cart />
-      <Payment />
+      <Router>
+      <Switch>
+      <Route exact path='/'>
+      <Redirect to='/cart' />
+      </Route>
+      <Route path='/cart' component={Cart} />
+      <Suspense fallback={<div>Loading...</div>}>
+      <Route path='/shipping' component={Shipping} />
+      </Suspense>
+      <Route component={NotFound} />
+      </Switch>
+      </Router>
       </Main>
     </VenuesContext.Provider>
   );
